@@ -11,8 +11,10 @@ export default function Photo() {
   const handleSelect = async (evt) => {
     const files = [...evt.target.files];
     const newPhotos = await Promise.all(files.map(file => fileToDataUrl(file)));
-    setPhotos(prevPhotos => ([...newPhotos, prevPhotos]));
+    
+    setPhotos(prevPhotos => [...newPhotos, ...prevPhotos]);
     inputRef.current.value = '';
+
 }
 
 const handleRemove = (removedPhoto) => {
@@ -34,16 +36,16 @@ return (
     </form>
 
     <div className={'photo-gallery'}>
-      {photos.map((photo) =>
-        <div className={'photo-gallery__item'} key={photo.id}>
-          <figure>
-            <img className={'photo-gallery__img'} src={photo.dataUrl} alt={photo.title}/>
-            <figcaption className={'photo-gallery__img-title'}>{photo.title}</figcaption>
-          </figure>
-          <button className={'photo-gallery__btn-remove'} onClick={() => handleRemove(photo)}>
-            <span className={'_visually-hidden'}>Удалить</span>
-          </button>
-        </div>
+      {photos.map((photo) => 
+         <div className={'photo-gallery__item'} key={photo.id}>
+         <figure>
+           <img className={'photo-gallery__img'} src={photo.dataUrl} alt={photo.title}/>
+           <figcaption className={'photo-gallery__img-title'}>{photo.title}</figcaption>
+         </figure>
+         <button className={'photo-gallery__btn-remove'} onClick={() => handleRemove(photo)}>
+           <span className={'_visually-hidden'}>Удалить</span>
+         </button>
+       </div>
       )}
     </div>
   </div>

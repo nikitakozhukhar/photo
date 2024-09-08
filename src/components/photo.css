@@ -77,6 +77,8 @@
 	border: 1px solid cornflowerblue;
 	border-radius: 50%;
 	background-color: white;
+
+	cursor: pointer;
 }
 
 .photo-gallery__btn-remove::after {
